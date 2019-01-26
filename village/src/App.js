@@ -11,7 +11,6 @@ class App extends Component {
     super(props);
     this.state = {
       smurfs: [],
-      newSmurf: {name:'', age:'', height:''},
     };
   }
   // add any needed code to ensure that the smurfs collection exists on state and it has data coming from the server
@@ -26,11 +25,18 @@ class App extends Component {
       this.setState({smurfs: response.data})})
     .catch(err => {console.log('Initital GET' + err)})
   }
+
+  updateSmurfs = (smurf) => {
+    axios.post('http://localhost:3333/smurfs', {...smurf})
+    .then(response => {console.log('Smurf POST: ' + response.statusText);
+      this.setState({smurfs: response.data})})
+    .catch(err => {console.log('Smurf POST: ' + err)})
+  }
   
   render() {
     return (
       <div className="App">
-        <SmurfForm />
+        <SmurfForm updateSmurfs = {this.updateSmurfs}/>
         <Smurfs smurfs={this.state.smurfs} />
       </div>
     );
