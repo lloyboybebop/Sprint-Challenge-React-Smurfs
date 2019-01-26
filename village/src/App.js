@@ -7,6 +7,7 @@ import Smurfs from './components/Smurfs';
 import axios from 'axios';
 import {Route} from 'react-router-dom';
 import Navigation from './components/Navigation';
+import SmurfPagina from './components/SmurfPagina';
 
 class App extends Component {
   constructor(props) {
@@ -40,9 +41,9 @@ class App extends Component {
       <div className="App">
         <Navigation />
 
-        <Route exact path = '/' render = {() => <Smurfs smurfs = {this.state.smurfs} />} />
+        <Route exact path = '/' render = {props => <Smurfs {...props} smurfs = {this.state.smurfs} />} />
         <Route path = '/smurf-form' render = {props => <SmurfForm {...props} updateSmurfs = {this.updateSmurfs} />} />
-        
+        <Route path = '/smurf/:smurfid' render = {props => <SmurfPagina {...props} smurfs = {this.state.smurfs}/>} />
       </div>
     );
   }
