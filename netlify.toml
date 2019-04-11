@@ -1,0 +1,4 @@
+[build]
+base = "village/"
+publish = "village/build/"
+command = "yarn build"
